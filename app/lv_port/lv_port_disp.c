@@ -14,6 +14,7 @@
 #include CMSIS_device_header
 #include <RTE_Device.h>
 #include "Driver_CDC200.h" // Display driver
+#include "sys_utils.h"     // ENABLE, DISABLE macros
 
 #include "dave_cfg.h"
 #include "dave_d0lib.h"

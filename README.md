@@ -1,7 +1,7 @@
 # Alif M55 LVGL Demo
 
 ## Description
-[LVGL](https://github.com/lvgl/lvgl) example for Alif E7 DevKit Gen2
+[LVGL](https://github.com/lvgl/lvgl) example for Alif E7/E8 DevKit
 
 This app is porting the LVGL [v9.1.0](https://github.com/lvgl/lvgl/releases/tag/v9.1.0) to Alif Cortex-M55 with D/AVE 2D GPU.
 It launches the Demo Benchmark example to measure its performance on the M55 HP and HE cores using GPU acceleration and FreeRTOS.
@@ -35,11 +35,11 @@ Please make sure you have setup your VSCode and other tools and environment base
 The required software setup consists of VSCode, Git, CMake, cmsis-toolbox, Arm GNU toolchain and Alif tools.
 
 This app also requires following CMSIS packs to be installed and added to the project:
-  * `ARM::CMSIS@>=5.9.0` (https://github.com/ARM-software/CMSIS_5/releases)
+  * `ARM::CMSIS@>=6.1.0` (https://github.com/ARM-software/CMSIS_6/releases)
   * `ARM::CMSIS-FreeRTOS@>=10.5.1` (https://github.com/ARM-software/CMSIS-FreeRTOS/releases)
   * `LVGL::lvgl@9.1.0` (https://github.com/lvgl/lvgl/tree/release/v9.1/env_support/cmsis-pack)
-  * `AlifSemiconductor::Ensemble@>=1.3.0` (https://github.com/alifsemi/alif_ensemble-cmsis-dfp/releases)
-  * `AlifSemiconductor::Dave2DDriver@1.0.1` (https://github.com/alifsemi/alif_dave2d-driver/releases)
+  * `AlifSemiconductor::Ensemble@>=2.1.0` (https://github.com/alifsemi/alif_ensemble-cmsis-dfp/releases)
+  * `AlifSemiconductor::Dave2DDriver@2.0.2` (https://github.com/alifsemi/alif_dave2d-driver/releases)
   * `AlifSemiconductor::LVGL_DAVE2D@1.0.2` (https://github.com/alifsemi/alif_lvgl-dave2d/releases)
 
 By default, these packs are installed VS Code `First time pack installation` script (see below).
