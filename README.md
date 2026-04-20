@@ -3,30 +3,30 @@
 ## Description
 [LVGL](https://github.com/lvgl/lvgl) example for Alif E7/E8 DevKit
 
-This app is porting the LVGL [v9.1.0](https://github.com/lvgl/lvgl/releases/tag/v9.1.0) to Alif Cortex-M55 with D/AVE 2D GPU.
+This app is porting the LVGL [v9.2.2](https://github.com/lvgl/lvgl/releases/tag/v9.2.2) to Alif Cortex-M55 with D/AVE 2D GPU.
 It launches the Demo Benchmark example to measure its performance on the M55 HP and HE cores using GPU acceleration and FreeRTOS.
 
-Benchmark Summary: LVGL v9.1.0, M55 HP core, D/AVE 2D, 60FPS display framerate
+Benchmark Summary for Alif E7 DevKit: LVGL v9.2.2, M55 HP core, D/AVE 2D, 60FPS display framerate
 
 | Name                      | Avg. CPU | Avg. FPS | Avg. time | render time | flush time |
 | ------------------------- |:--------:|:--------:|:---------:|:-----------:| ----------:|
-| Empty screen              | 14%      | 54       | 12        | 1           | 11         |
-| Moving wallpaper          | 13%      | 61       | 14        | 6           | 8          |
-| Single rectangle          | 1%       | 60       | 15        | 0           | 15         |
-| Multiple rectangles       | 11%      | 60       | 15        | 1           | 14         |
-| Multiple RGB images       | 23%      | 60       | 14        | 3           | 11         |
-| Multiple ARGB images      | 24%      | 60       | 13        | 6           | 7          |
-| Rotated ARGB images       | 13%      | 30       | 30        | 23          | 7          |
-| Multiple labels           | 42%      | 60       | 15        | 7           | 8          |
-| Screen sized text         | 84%      | 30       | 31        | 28          | 3          |
-| Multiple arcs             | 21%      | 61       | 13        | 2           | 11         |
-| Containers                | 15%      | 60       | 14        | 2           | 12         |
-| Containers with overlay   | 47%      | 60       | 15        | 10          | 5          |
-| Containers with opa       | 15%      | 60       | 14        | 2           | 12         |
-| Containers with opa_layer | 44%      | 56       | 16        | 9           | 7          |
-| Containers with scrolling | 53%      | 60       | 14        | 9           | 5          |
-| Widgets demo              | 48%      | 37       | 21        | 10          | 11         |
-| All scenes avg.           | 29%      | 54       | 16        | 7           | 9          |
+| Empty screen              | 15%      | 61       | 9         | 2           | 7          |
+| Moving wallpaper          | 22%      | 61       | 15        | 8           | 7          |
+| Single rectangle          | 1%       | 61       | 6         | 0           | 6          |
+| Multiple rectangles       | 13%      | 61       | 6         | 1           | 5          |
+| Multiple RGB images       | 25%      | 61       | 6         | 3           | 3          |
+| Multiple ARGB images      | 28%      | 61       | 7         | 4           | 3          |
+| Rotated ARGB images       | 5%       | 10       | 95        | 85          | 10         |
+| Multiple labels           | 49%      | 61       | 14        | 7           | 7          |
+| Screen sized text         | 82%      | 30       | 31        | 27          | 4          |
+| Multiple arcs             | 21%      | 61       | 9         | 2           | 7          |
+| Containers                | 14%      | 61       | 2         | 2           | 0          |
+| Containers with overlay   | 53%      | 60       | 15        | 10          | 5          |
+| Containers with opa       | 15%      | 61       | 3         | 2           | 1          |
+| Containers with opa_layer | 51%      | 53       | 16        | 10          | 6          |
+| Containers with scrolling | 61%      | 61       | 14        | 10          | 4          |
+| Widgets demo              | 76%      | 54       | 11        | 10          | 1          |
+| All scenes avg.           | 33%      | 54       | 15        | 11          | 4          |
 
 ## Requirements
 This application is built on [VSCode Getting Started Template](https://github.com/alifsemi/alif_vscode-template).
@@ -37,10 +37,10 @@ The required software setup consists of VSCode, Git, CMake, cmsis-toolbox, Arm G
 This app also requires following CMSIS packs to be installed and added to the project:
   * `ARM::CMSIS@>=6.1.0` (https://github.com/ARM-software/CMSIS_6/releases)
   * `ARM::CMSIS-FreeRTOS@>=10.5.1` (https://github.com/ARM-software/CMSIS-FreeRTOS/releases)
-  * `LVGL::lvgl@9.1.0` (https://github.com/lvgl/lvgl/tree/release/v9.1/env_support/cmsis-pack)
+  * `LVGL::lvgl@9.2.2` (https://github.com/lvgl/lvgl/tree/release/v9.2/env_support/cmsis-pack)
   * `AlifSemiconductor::Ensemble@>=2.1.0` (https://github.com/alifsemi/alif_ensemble-cmsis-dfp/releases)
   * `AlifSemiconductor::Dave2DDriver@2.0.2` (https://github.com/alifsemi/alif_dave2d-driver/releases)
-  * `AlifSemiconductor::LVGL_DAVE2D@1.0.2` (https://github.com/alifsemi/alif_lvgl-dave2d/releases)
+  * `AlifSemiconductor::LVGL_DAVE2D@1.1.2` (https://github.com/alifsemi/alif_lvgl-dave2d/releases)
 
 By default, these packs are installed VS Code `First time pack installation` script (see below).
 
@@ -59,9 +59,9 @@ After setting up the environment according to the [VSCode Getting Started Templa
 3. **F1** --> Tasks:Run Task --> Program with Security Toolkit
 
 #### Dave2DDriver and LVGL_DAVE2D packs installation
-If you need to install `AlifSemiconductor::Dave2DDriver@1.0.1` and `AlifSemiconductor::LVGL_DAVE2D@1.0.1` manually, follow next steps:
-1. Download `AlifSemiconductor.Dave2DDriver.1.0.1.pack` from https://github.com/alifsemi/alif_dave2d-driver
-2. Download `AlifSemiconductor.LVGL_DAVE2D.1.0.1.pack` from https://github.com/alifsemi/alif_lvgl-dave2d
+If you need to install `AlifSemiconductor::Dave2DDriver@2.0.2` and `AlifSemiconductor::LVGL_DAVE2D@1.1.2` manually, follow next steps:
+1. Download `AlifSemiconductor.Dave2DDriver.2.0.2.pack` from https://github.com/alifsemi/alif_dave2d-driver
+2. Download `AlifSemiconductor.LVGL_DAVE2D.1.1.2.pack` from https://github.com/alifsemi/alif_lvgl-dave2d
 3. Open VS Code Terminal: **Terminal** --> **New terminal**
-4. Enter the directory where `AlifSemiconductor.Dave2DDriver.1.0.1.pack` and `AlifSemiconductor.LVGL_DAVE2D.1.0.1.pack` are located
-5. Execute commands `cpackget add AlifSemiconductor.Dave2DDriver.1.0.1.pack; cpackget add AlifSemiconductor.LVGL_DAVE2D.1.0.1.pack`
+4. Enter the directory where `AlifSemiconductor.Dave2DDriver.2.0.2.pack` and `AlifSemiconductor.LVGL_DAVE2D.1.1.2.pack` are located
+5. Execute commands `cpackget add AlifSemiconductor.Dave2DDriver.2.0.2.pack; cpackget add AlifSemiconductor.LVGL_DAVE2D.1.1.2.pack`

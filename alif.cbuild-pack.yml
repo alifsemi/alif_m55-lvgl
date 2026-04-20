@@ -12,9 +12,9 @@ cbuild-pack:
     - resolved-pack: AlifSemiconductor::Ensemble@2.1.0
       selected-by-pack:
         - AlifSemiconductor::Ensemble@2.1.0
-    - resolved-pack: AlifSemiconductor::LVGL_DAVE2D@1.0.2
+    - resolved-pack: AlifSemiconductor::LVGL_DAVE2D@1.1.2
       selected-by-pack:
-        - AlifSemiconductor::LVGL_DAVE2D@1.0.2
-    - resolved-pack: LVGL::lvgl@9.1.0
+        - AlifSemiconductor::LVGL_DAVE2D@1.1.2
+    - resolved-pack: LVGL::lvgl@9.2.2
       selected-by-pack:
-        - LVGL::lvgl@9.1.0
+        - LVGL::lvgl@9.2.2
