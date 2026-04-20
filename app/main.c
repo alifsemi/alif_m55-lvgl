@@ -10,10 +10,10 @@
 #include "RTE_Components.h"
 #include CMSIS_device_header
 
-#include "Driver_GPIO.h"
-#include "board.h"
-#include "power.h"
+#include "Driver_IO.h"
 #include "se_services_port.h"
+#include "board_config.h"
+#include "board_utils.h"
 
 #include "lv_port_disp.h"
 #include "demos/benchmark/lv_demo_benchmark.h"
@@ -58,6 +58,40 @@ void clock_init()
     }
 }
 
+uint32_t set_run_profile()
+{
+    run_profile_t default_runprof;
+    uint32_t service_error_code;
+    uint32_t err;
+
+    // By default all the needed memories, power domains and gatings are enabled.
+    // Use case can easily change these for more suitable settings extern default_runprof/default_offprof and change only
+    // the needed values and call set_power_run_profile/set_power_off_profile
+#ifdef BALLETTO_DEVICE // Balletto support only PFM
+    default_runprof.dcdc_mode       = DCDC_MODE_PFM_FORCED;
+    // No following memories on E1C/B1: SRAM0_MASK | SRAM1_MASK | SRAM6A_MASK | SRAM6B_MASK | SRAM7_1_MASK | SRAM7_2_MASK | SRAM7_3_MASK | SRAM8_MASK | SRAM9_MASK
+    default_runprof.memory_blocks   = SERAM_MASK | MRAM_MASK | FWRAM_MASK | BACKUP4K_MASK;
+    default_runprof.phy_pwr_gating  = LDO_PHY_MASK;
+    default_runprof.ip_clock_gating = LP_PERIPH_MASK | NPU_HE_MASK;
+#else
+    default_runprof.dcdc_mode       = DCDC_MODE_PWM;
+    default_runprof.memory_blocks   = SERAM_MASK | SRAM0_MASK | SRAM1_MASK | MRAM_MASK | FWRAM_MASK | BACKUP4K_MASK;
+    default_runprof.phy_pwr_gating  = LDO_PHY_MASK | MIPI_PLL_DPHY_MASK | MIPI_TX_DPHY_MASK;
+#endif
+    default_runprof.power_domains   = PD_VBAT_AON_MASK | PD_SSE700_AON_MASK | PD_SYST_MASK | PD_SESS_MASK;
+    default_runprof.dcdc_voltage    = 825;
+    default_runprof.aon_clk_src     = CLK_SRC_LFXO;
+    default_runprof.run_clk_src     = CLK_SRC_PLL;
+    default_runprof.scaled_clk_freq = SCALED_FREQ_XO_HIGH_DIV_38_4_MHZ;
+#if defined(M55_HE) || defined(RTSS_HE)
+    default_runprof.cpu_clk_freq    = CLOCK_FREQUENCY_160MHZ;
+#elif defined(M55_HP) || defined(RTSS_HP)
+    default_runprof.cpu_clk_freq    = CLOCK_FREQUENCY_400MHZ;
+#endif
+    default_runprof.vdd_ioflex_3V3  = IOFLEX_LEVEL_1V8;
+    return SERVICES_set_run_cfg(se_services_s_handle, &default_runprof, &service_error_code);
+}
+
 #if defined(LV_USE_OS) && (LV_USE_OS == LV_OS_FREERTOS)
 void lvgl_tick_timer_callback(TimerHandle_t xTimer)
 {
@@ -77,13 +111,16 @@ void lvgl_thread(void *pvParam)
 {
     (void) pvParam;
 
-    // Enable MIPI power
-    enable_mipi_dphy_power();
-    disable_mipi_dphy_isolation();
-
     // Initialize the SE services
     se_services_port_init();
     clock_init();
+
+    if (set_run_profile()) {
+        printf("Error setting run profile\n");
+        __BKPT();
+    }
+
+    BOARD_LED1_Init();
 
     // Initialize display
     lv_port_disp_init();
@@ -106,7 +143,9 @@ int main (void)
 {
     // System Initialization
     SystemCoreClockUpdate();
-    BOARD_Pinmux_Init();
+    board_pins_config();
+    board_gpios_config();
+
 #if !defined(DISABLE_UART_TRACE)
     tracelib_init(NULL, NULL);
 #endif
