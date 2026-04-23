@@ -42,25 +42,16 @@
 /* AlifSemiconductor::Graphics:Acceleration:GPU AlifSemi-Dave2D@1.0.0 */
 /*! \brief enable Dave2D */
 #define LV_USE_DRAW_DAVE2D  1
-/* LVGL::LVGL&LVGL9:Demos:Benchmark@9.1.0 */
-/*! \brief enable demo:bencharmk */
+/* LVGL::LVGL&LVGL9:Demos:Benchmark@9.2.2 */
+/*! \brief enable demo:benchmark */
 #define LV_USE_DEMO_BENCHMARK           1
-/* LVGL::LVGL&LVGL9:Demos:Widgets@9.1.0 */
+/* LVGL::LVGL&LVGL9:Demos:Widgets@9.2.2 */
 /*! \brief enable demo:widgets support */
 #define LV_USE_DEMO_WIDGETS             1
-/* LVGL::LVGL&LVGL9:Essential@9.1.0 */
+/* LVGL::LVGL&LVGL9:Essential@9.2.2 */
 /*! \brief Enable LVGL */
 #define RTE_GRAPHICS_LVGL
-/* LVGL::LVGL&LVGL9:OS Abstraction Layer&FreeRTOS@9.1.0 */
-/*   Select an operating system to use. Possible options:
-* - LV_OS_NONE
-* - LV_OS_PTHREAD
-* - LV_OS_FREERTOS
-* - LV_OS_CMSIS_RTOS2
-* - LV_OS_RTTHREAD
-* - LV_OS_WINDOWS
-* - LV_OS_CUSTOM
-*/
+/* LVGL::LVGL&LVGL9:OS Abstraction Layer&FreeRTOS@9.2.2 */
 #define LV_USE_OS   LV_OS_FREERTOS
 
 
