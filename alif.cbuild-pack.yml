@@ -6,15 +6,15 @@ cbuild-pack:
     - resolved-pack: ARM::CMSIS-FreeRTOS@11.2.0
       selected-by-pack:
         - ARM::CMSIS-FreeRTOS@>=10.5.1
-    - resolved-pack: AlifSemiconductor::Dave2DDriver@2.0.2
+    - resolved-pack: AlifSemiconductor::Dave2DDriver@2.0.3
       selected-by-pack:
-        - AlifSemiconductor::Dave2DDriver@2.0.2
+        - AlifSemiconductor::Dave2DDriver@2.0.3
     - resolved-pack: AlifSemiconductor::Ensemble@2.1.0
       selected-by-pack:
         - AlifSemiconductor::Ensemble@2.1.0
-    - resolved-pack: AlifSemiconductor::LVGL_DAVE2D@1.1.2
+    - resolved-pack: AlifSemiconductor::LVGL_DAVE2D@1.2.0
       selected-by-pack:
-        - AlifSemiconductor::LVGL_DAVE2D@1.1.2
-    - resolved-pack: LVGL::lvgl@9.2.2
+        - AlifSemiconductor::LVGL_DAVE2D@1.2.0
+    - resolved-pack: LVGL::lvgl@9.5.0
       selected-by-pack:
-        - LVGL::lvgl@9.2.2
+        - LVGL::lvgl@9.5.0

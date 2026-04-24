@@ -39,19 +39,19 @@
 #define RTE_Drivers_MIPI_DSI               /* Driver MIPI DSI */
 /* AlifSemiconductor::Device:SOC Peripherals:PINCONF@2.1.0 */
 #define RTE_Drivers_LL_PINCONF              /* Driver PinPAD and PinMux */
-/* AlifSemiconductor::Graphics:Acceleration:GPU AlifSemi-Dave2D@1.0.0 */
+/* AlifSemiconductor::Graphics:Acceleration:GPU AlifSemi-Dave2D@1.2.0 */
 /*! \brief enable Dave2D */
 #define LV_USE_DRAW_DAVE2D  1
-/* LVGL::LVGL&LVGL9:Demos:Benchmark@9.2.2 */
+/* LVGL::LVGL&LVGL9:Demos:Benchmark@9.5.0 */
 /*! \brief enable demo:benchmark */
 #define LV_USE_DEMO_BENCHMARK           1
-/* LVGL::LVGL&LVGL9:Demos:Widgets@9.2.2 */
+/* LVGL::LVGL&LVGL9:Demos:Widgets@9.5.0 */
 /*! \brief enable demo:widgets support */
 #define LV_USE_DEMO_WIDGETS             1
-/* LVGL::LVGL&LVGL9:Essential@9.2.2 */
+/* LVGL::LVGL&LVGL9:Essential@9.5.0 */
 /*! \brief Enable LVGL */
 #define RTE_GRAPHICS_LVGL
-/* LVGL::LVGL&LVGL9:OS Abstraction Layer&FreeRTOS@9.2.2 */
+/* LVGL::LVGL&LVGL9:OS Abstraction Layer&FreeRTOS@9.5.0 */
 #define LV_USE_OS   LV_OS_FREERTOS
 
 

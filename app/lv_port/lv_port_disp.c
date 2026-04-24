@@ -16,10 +16,12 @@
 #include "Driver_CDC200.h" // Display driver
 #include "sys_utils.h"     // ENABLE, DISABLE macros
 
+#if LV_USE_DRAW_DAVE2D
 #include "dave_cfg.h"
 #include "dave_d0lib.h"
 #include "dave_driver.h"
 #include "lv_draw_dave2d_utils.h"
+#endif
 
 #if defined(LV_USE_OS) && (LV_USE_OS == LV_OS_FREERTOS)
 #include "FreeRTOS.h"
@@ -52,9 +54,11 @@
 #define EVENT_DISP_BUFFER_CHANGED   ( 1 << 1 )
 #endif
 
+#if LV_USE_DRAW_DAVE2D
 #if (D1_MEM_ALLOC == D1_MALLOC_D0LIB)
 // D/AVE D0 heap address and size
 #define D1_HEAP_SIZE	0x80000
+#endif
 #endif
 
 /**********************
@@ -88,8 +92,10 @@ static void disp_callback(uint32_t event);
  *  STATIC VARIABLES
  **********************/
 
+ #if LV_USE_DRAW_DAVE2D
 #if (D1_MEM_ALLOC == D1_MALLOC_D0LIB)
 static uint8_t __attribute__((section(".bss.at_sram1"))) d0_heap[D1_HEAP_SIZE];
+#endif
 #endif
 
 static Pixel lcd_buffer_1[MY_DISP_VER_RES][MY_DISP_HOR_RES]
@@ -136,6 +142,7 @@ void lv_port_disp_init(void)
     NVIC_SetPriority(CDC_SCANLINE0_IRQ_IRQn, configKERNEL_INTERRUPT_PRIORITY);
 #endif
 
+#if LV_USE_DRAW_DAVE2D
 #if (D1_MEM_ALLOC == D1_MALLOC_D0LIB)
     /*-------------------------
      * Initialize D/AVE D0 heap
@@ -147,7 +154,7 @@ void lv_port_disp_init(void)
         return;
     }
 #endif
-
+#endif
     lv_init();
 
     /*------------------------------------
@@ -233,11 +240,6 @@ void disp_disable_update(void)
 static void disp_flush(lv_display_t * disp_drv, const lv_area_t * area, uint8_t * px_map)
 {
     if (disp_flush_enabled && lv_disp_flush_is_last(disp_drv)) {
-        d2_finish_rendering();
-
-        //uint32_t size = lv_area_get_width(area) * lv_area_get_height(area)
-        //                * lv_color_format_get_size(lv_display_get_color_format(disp_drv));
-        //SCB_CleanInvalidateDCache_by_Addr(px_map, size);
 
         #if defined(USE_EVT_GROUP)
         xEventGroupClearBits(dispEventGroupHandle, EVENT_DISP_BUFFER_READY);
@@ -302,4 +304,3 @@ static void disp_callback(uint32_t event)
         __BKPT(0);
     }
 }
-
