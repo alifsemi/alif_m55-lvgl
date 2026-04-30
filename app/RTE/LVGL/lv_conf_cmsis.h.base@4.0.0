@@ -11,7 +11,6 @@
 
 #if defined(_RTE_)
 #include "RTE_Components.h"
-#include CMSIS_device_header
 #endif
 
 /* If you need to include anything here, do it inside the `__ASSEMBLY__` guard */
@@ -88,7 +87,7 @@
  *====================*/
 
 /** Default display refresh, input device read and animation step period. */
-#define LV_DEF_REFR_PERIOD  16      /**< [ms] */
+#define LV_DEF_REFR_PERIOD  33      /**< [ms] */
 
 /** Default Dots Per Inch. Used to initialize default sizes such as widgets sized, style paddings.
  * (Not so important, you can adjust it to modify default sizes and spaces.) */
@@ -455,7 +454,7 @@
  *-----------*/
 
 /** Enable log module */
-#define LV_USE_LOG 1
+#define LV_USE_LOG 0
 #if LV_USE_LOG
     /** Set value to one of the following levels of logging detail:
      *  - LV_LOG_LEVEL_TRACE    Log detailed information.
@@ -617,13 +616,8 @@
 /** Attribute to mark large constant arrays, for example for font bitmaps */
 #define LV_ATTRIBUTE_LARGE_CONST
 
-/*Attribute to mark benchmark assets*/
-#define LV_ATTRIBUTE_IMAGE_IMG_COGWHEEL_ARGB        LV_ATTRIBUTE_LARGE_CONST
-#define LV_ATTRIBUTE_IMAGE_IMG_COGWHEEL_RGB         LV_ATTRIBUTE_LARGE_CONST
-#define LV_ATTRIBUTE_IMAGE_IMG_DEMO_WIDGETS_NEEDLE  LV_ATTRIBUTE_LARGE_CONST
-
 /** Compiler prefix for a large array declaration in RAM */
-#define LV_ATTRIBUTE_LARGE_RAM_ARRAY __attribute__((section(".bss.at_sram1")))
+#define LV_ATTRIBUTE_LARGE_RAM_ARRAY
 
 /** Place performance critical functions into a faster memory (e.g RAM) */
 #define LV_ATTRIBUTE_FAST_MEM
@@ -1046,16 +1040,10 @@
 /* Documentation for several of the below items can be found here: https://docs.lvgl.io/master/auxiliary-modules/index.html . */
 
 /** 1: Enable system monitor component */
-#define LV_USE_SYSMON   1
+#define LV_USE_SYSMON   0
 #if LV_USE_SYSMON
-    #if defined(LV_USE_OS) && (LV_USE_OS == LV_OS_FREERTOS)
-        /*Report idle percentage from FreeRTOS*/
-        #define LV_SYSMON_GET_IDLE freertos_get_idle_percent
-    #else
-        /** Get the idle percentage. E.g. uint32_t my_get_idle(void); */
-        #define LV_SYSMON_GET_IDLE lv_os_get_idle_percent
-    #endif
-
+    /** Get the idle percentage. E.g. uint32_t my_get_idle(void); */
+    #define LV_SYSMON_GET_IDLE lv_os_get_idle_percent
     /** 1: Enable usage of lv_os_get_proc_idle_percent.*/
     #define LV_SYSMON_PROC_IDLE_AVAILABLE 0
     #if LV_SYSMON_PROC_IDLE_AVAILABLE
@@ -1066,7 +1054,7 @@
 
     /** 1: Show CPU usage and FPS count.
      *  - Requires `LV_USE_SYSMON = 1` */
-    #define LV_USE_PERF_MONITOR 1
+    #define LV_USE_PERF_MONITOR 0
     #if LV_USE_PERF_MONITOR
         #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 
